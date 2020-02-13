@@ -9,5 +9,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="RelojDigitalv2" />
     <orderEntry type="library" name="javafx.base-casa" level="application" />
+    <orderEntry type="library" name="controlsfx-11.0.0" level="application" />
   </component>
 </module>

@@ -14,7 +14,7 @@ public class Prueba extends Application {
     public void start(Stage stage) throws Exception {
         VBox vBox=new VBox();
         ComponenteReloj cp=new ComponenteReloj();
-        Tarea tarea = new Tarea(3, 19, 50 , "pruebaAlarma");
+        Tarea tarea = new Tarea(16, 42, 30 , "pruebaAlarma");
         cp.setFormato24h(false);
         cp.registarTarea(tarea);
         cp.addEnHoraQueCoincide(new EnHoraQueCoincide() {
