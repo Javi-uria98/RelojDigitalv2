@@ -10,10 +10,9 @@ public class Tarea {
     private int minutos;
     private int segundos;
     private String textoAlarma;
-    private Date fecha;
-    private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    private LocalDate fecha;
 
-    public Tarea (int horas, int minutos, int segundos, String textoAlarma, Date fecha){
+    public Tarea (int horas, int minutos, int segundos, String textoAlarma, LocalDate fecha){
         this.horas=horas;
         this.minutos=minutos;
         this.segundos=segundos;
@@ -53,17 +52,12 @@ public class Tarea {
         this.textoAlarma = textoAlarma;
     }
 
-    public Date getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
-
-    public String getSDFDate(){
-        return sdf.format(fecha);
-    }
-
 
 }

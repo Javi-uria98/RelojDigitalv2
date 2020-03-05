@@ -10,6 +10,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -20,10 +21,13 @@ public class Prueba extends Application {
     public void start(Stage stage) throws Exception {
         VBox vBox=new VBox();
         ComponenteReloj cp=new ComponenteReloj();
-        Date date = new Date();
-        Tarea tarea = new Tarea(2, 56, 45 , "pruebaAlarma", date);
+        LocalDate date=LocalDate.now();
+        LocalDate date2=LocalDate.of(2014 , 2 , 11);
+        Tarea tarea = new Tarea(4, 3, 5 , "pruebaAlarma", date);
+        Tarea tarea2 = new Tarea(4, 3,10,"prueba2",date2);
         cp.setFormato24h(false);
         cp.registarTarea(tarea);
+        cp.registarTarea(tarea2);
         cp.addEnHoraQueCoincide(new EnHoraQueCoincide() {
             @Override
             public void ejecuta(Tarea tarea) {

@@ -19,6 +19,7 @@ public class ComponenteReloj extends Label {
     private int horas;
     private int minutos;
     private int segundos;
+    private LocalDate fecha;
     private ArrayList<Tarea> listaTareas;
     private ArrayList<EnHoraQueCoincide> enHoraQueCoincide;
 
@@ -76,6 +77,12 @@ public class ComponenteReloj extends Label {
         this.segundos = segundos;
     }*/
 
+    public LocalDate getFecha() {return fecha; }
+
+    /*public void setFecha(LocalDate fecha){
+        this.fecha=fecha;
+    }*/
+
     public void iniciar() {
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
@@ -89,8 +96,7 @@ public class ComponenteReloj extends Label {
                         horas = now.getHour();
                         minutos = now.getMinute();
                         segundos = now.getSecond();
-                        Date date = new Date();
-                        String fecha = sdf.format(date);
+                        fecha=now.toLocalDate();
                         DecimalFormat formatter = new DecimalFormat("00");
                         if (formato24h.get() || horas<12) {
                             setText(formatter.format(horas) + ":" + formatter.format(minutos) + ":" + formatter.format(segundos));
@@ -100,12 +106,12 @@ public class ComponenteReloj extends Label {
                         }
                         if (listaTareas != null) {
                             for (Tarea tarea : listaTareas) {
-                                if (fecha.equals(tarea.getSDFDate()) && horas == tarea.getHoras() && minutos == tarea.getMinutos() && segundos == tarea.getSegundos()) {
+                                if (fecha.equals(tarea.getFecha()) && horas == tarea.getHoras() && minutos == tarea.getMinutos() && segundos == tarea.getSegundos()) {
                                     for (EnHoraQueCoincide e : enHoraQueCoincide) {
                                         e.ejecuta(tarea);
                                     }
                                 } else {
-                                    if (fecha.equals(tarea.getSDFDate()) && horas == tarea.getHoras() - 12 && minutos == tarea.getMinutos() && segundos == tarea.getSegundos()) {
+                                    if (fecha.equals(tarea.getFecha()) && horas == tarea.getHoras() - 12 && minutos == tarea.getMinutos() && segundos == tarea.getSegundos()) {
                                         for (EnHoraQueCoincide e : enHoraQueCoincide) {
                                             e.ejecuta(tarea);
                                         }
