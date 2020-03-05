@@ -102,7 +102,7 @@ public class ComponenteReloj extends Label {
                             setText(formatter.format(horas) + ":" + formatter.format(minutos) + ":" + formatter.format(segundos));
                         } else {
                             horas = horas - 12;
-                            setText(formatter.format(horas) + ":" + formatter.format(minutos) + ":" + formatter.format(segundos));
+                            setText(formatter.format(horas) + ":" + formatter.format(minutos) + ":" + formatter.format(segundos)+" AM");
                         }
                         if (listaTareas != null) {
                             for (Tarea tarea : listaTareas) {
