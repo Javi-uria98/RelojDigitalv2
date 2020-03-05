@@ -101,8 +101,13 @@ public class ComponenteReloj extends Label {
                         if (formato24h.get() || horas<12) {
                             setText(formatter.format(horas) + ":" + formatter.format(minutos) + ":" + formatter.format(segundos));
                         } else {
+                            String am_pm;
+                            if (horas>12)
+                                am_pm=" PM";
+                            else
+                                am_pm=" AM";
                             horas = horas - 12;
-                            setText(formatter.format(horas) + ":" + formatter.format(minutos) + ":" + formatter.format(segundos)+" AM");
+                            setText(formatter.format(horas) + ":" + formatter.format(minutos) + ":" + formatter.format(segundos)+am_pm);
                         }
                         if (listaTareas != null) {
                             for (Tarea tarea : listaTareas) {
