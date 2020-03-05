@@ -7,17 +7,21 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.*;
 
 public class ComponenteReloj extends Label {
 
     private BooleanProperty formato24h = new SimpleBooleanProperty();
+    private SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy");
     private int horas;
     private int minutos;
     private int segundos;
     private ArrayList<Tarea> listaTareas;
     private ArrayList<EnHoraQueCoincide> enHoraQueCoincide;
+
 
     public ComponenteReloj() {
         enHoraQueCoincide = new ArrayList<EnHoraQueCoincide>();
@@ -77,45 +81,42 @@ public class ComponenteReloj extends Label {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                if (true) {
 
-                    Platform.runLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            ZonedDateTime now = ZonedDateTime.now();
-                            horas = now.getHour();
-                            minutos = now.getMinute();
-                            segundos = now.getSecond();
-                            DecimalFormat formatter = new DecimalFormat("00");
-                            if (formato24h.get() || horas<12) {
-                                setText(formatter.format(horas) + ":" + formatter.format(minutos) + ":" + formatter.format(segundos));
-                            } else {
-                                horas = horas - 12;
-                                setText(formatter.format(horas) + ":" + formatter.format(minutos) + ":" + formatter.format(segundos));
-                            }
-                            if (listaTareas != null) {
-                                for (Tarea tarea : listaTareas) {
-                                    if (horas == tarea.getHoras() && minutos == tarea.getMinutos() && segundos == tarea.getSegundos()) {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        ZonedDateTime now = ZonedDateTime.now();
+                        horas = now.getHour();
+                        minutos = now.getMinute();
+                        segundos = now.getSecond();
+                        Date date = new Date();
+                        String fecha = sdf.format(date);
+                        DecimalFormat formatter = new DecimalFormat("00");
+                        if (formato24h.get() || horas<12) {
+                            setText(formatter.format(horas) + ":" + formatter.format(minutos) + ":" + formatter.format(segundos));
+                        } else {
+                            horas = horas - 12;
+                            setText(formatter.format(horas) + ":" + formatter.format(minutos) + ":" + formatter.format(segundos));
+                        }
+                        if (listaTareas != null) {
+                            for (Tarea tarea : listaTareas) {
+                                if (fecha.equals(tarea.getSDFDate()) && horas == tarea.getHoras() && minutos == tarea.getMinutos() && segundos == tarea.getSegundos()) {
+                                    for (EnHoraQueCoincide e : enHoraQueCoincide) {
+                                        e.ejecuta(tarea);
+                                    }
+                                } else {
+                                    if (fecha.equals(tarea.getSDFDate()) && horas == tarea.getHoras() - 12 && minutos == tarea.getMinutos() && segundos == tarea.getSegundos()) {
                                         for (EnHoraQueCoincide e : enHoraQueCoincide) {
                                             e.ejecuta(tarea);
                                         }
-                                    } else {
-                                        if (horas == tarea.getHoras() - 12 && minutos == tarea.getMinutos() && segundos == tarea.getSegundos()) {
-                                            for (EnHoraQueCoincide e : enHoraQueCoincide) {
-                                                e.ejecuta(tarea);
-                                            }
-                                        }
                                     }
                                 }
-
                             }
-                        }
-                    });
 
-                } else {
-                    timer.cancel();
-                    timer.purge();
-                }
+                        }
+                    }
+                });
+
             }
         }, 0, 1000);
 

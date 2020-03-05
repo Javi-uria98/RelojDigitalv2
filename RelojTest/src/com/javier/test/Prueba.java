@@ -4,9 +4,15 @@ import com.javier.componente.ComponenteReloj;
 import com.javier.componente.EnHoraQueCoincide;
 import com.javier.componente.Tarea;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class Prueba extends Application {
 
@@ -14,7 +20,8 @@ public class Prueba extends Application {
     public void start(Stage stage) throws Exception {
         VBox vBox=new VBox();
         ComponenteReloj cp=new ComponenteReloj();
-        Tarea tarea = new Tarea(3, 19, 50 , "pruebaAlarma");
+        Date date = new Date();
+        Tarea tarea = new Tarea(2, 56, 45 , "pruebaAlarma", date);
         cp.setFormato24h(false);
         cp.registarTarea(tarea);
         cp.addEnHoraQueCoincide(new EnHoraQueCoincide() {
@@ -36,6 +43,7 @@ public class Prueba extends Application {
         stage.setScene(scene);
         stage.show();
         cp.iniciar();
+
     }
 
     public static void main (String[] args){

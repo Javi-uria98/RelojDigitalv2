@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
 import java.net.URL;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class MainWindowController implements Initializable {
@@ -16,8 +17,9 @@ public class MainWindowController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Tarea tarea=new Tarea(3, 23, 0, "Alarma comprar pan");
-        Tarea tarea2=new Tarea(3, 23, 3, "Alarma comprar leche");
+        Date date=new Date();
+        Tarea tarea=new Tarea(2, 57, 50, "Alarma comprar pan", date);
+        Tarea tarea2=new Tarea(2, 57, 55, "Alarma comprar leche", date);
         cp.registarTarea(tarea);
         cp.registarTarea(tarea2);
         cp.borrarTarea(tarea2);
