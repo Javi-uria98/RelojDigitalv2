@@ -48,6 +48,13 @@ public class Prueba extends Application {
         stage.show();
         cp.iniciar();
 
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent windowEvent) {
+                cp.getTimer().cancel();
+                cp.getTimer().purge();
+            }
+        });
     }
 
     public static void main (String[] args){

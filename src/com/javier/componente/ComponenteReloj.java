@@ -14,6 +14,7 @@ import java.util.*;
 
 public class ComponenteReloj extends Label {
 
+    private Timer timer;
     private BooleanProperty formato24h = new SimpleBooleanProperty();
     private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     private int horas;
@@ -86,7 +87,7 @@ public class ComponenteReloj extends Label {
     }*/
 
     public void iniciar() {
-        Timer timer = new Timer();
+        timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -144,5 +145,9 @@ public class ComponenteReloj extends Label {
 
     public void borrarTarea(Tarea tarea) {
         listaTareas.remove(tarea);
+    }
+
+    public Timer getTimer(){
+        return timer;
     }
 }
