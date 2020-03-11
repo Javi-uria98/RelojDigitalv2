@@ -25,7 +25,7 @@ public class Prueba extends Application {
         LocalDate date2=LocalDate.of(2014 , 2 , 11);
         Tarea tarea = new Tarea(4, 3, 5 , "pruebaAlarma", date);
         Tarea tarea2 = new Tarea(4, 3,10,"prueba2",date2);
-        cp.setFormato24h(false);
+        cp.setFormato24h(true);
         cp.registarTarea(tarea);
         cp.registarTarea(tarea2);
         cp.addEnHoraQueCoincide(new EnHoraQueCoincide() {

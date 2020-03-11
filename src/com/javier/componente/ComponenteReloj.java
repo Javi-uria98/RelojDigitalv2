@@ -15,7 +15,7 @@ import java.util.*;
 public class ComponenteReloj extends Label {
 
     private BooleanProperty formato24h = new SimpleBooleanProperty();
-    private SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy");
+    private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     private int horas;
     private int minutos;
     private int segundos;
@@ -77,7 +77,9 @@ public class ComponenteReloj extends Label {
         this.segundos = segundos;
     }*/
 
-    public LocalDate getFecha() {return fecha; }
+    public LocalDate getFecha() {
+        return fecha;
+    }
 
     /*public void setFecha(LocalDate fecha){
         this.fecha=fecha;
@@ -96,18 +98,21 @@ public class ComponenteReloj extends Label {
                         horas = now.getHour();
                         minutos = now.getMinute();
                         segundos = now.getSecond();
-                        fecha=now.toLocalDate();
+                        fecha = now.toLocalDate();
                         DecimalFormat formatter = new DecimalFormat("00");
-                        if (formato24h.get() || horas<12) {
+                        if (formato24h.get()) {
                             setText(formatter.format(horas) + ":" + formatter.format(minutos) + ":" + formatter.format(segundos));
                         } else {
                             String am_pm;
-                            if (horas>12)
-                                am_pm=" PM";
+
+                            if (horas >= 12)
+                                am_pm = " PM";
                             else
-                                am_pm=" AM";
-                            horas = horas - 12;
-                            setText(formatter.format(horas) + ":" + formatter.format(minutos) + ":" + formatter.format(segundos)+am_pm);
+                                am_pm = " AM";
+
+                            if (horas > 12)
+                                horas = horas - 12;
+                            setText(formatter.format(horas) + ":" + formatter.format(minutos) + ":" + formatter.format(segundos) + am_pm);
                         }
                         if (listaTareas != null) {
                             for (Tarea tarea : listaTareas) {
